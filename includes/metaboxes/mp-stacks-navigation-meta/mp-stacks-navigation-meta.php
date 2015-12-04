@@ -115,6 +115,27 @@ function mp_stacks_navigation_create_meta_box(){
 			'field_showhider' => 'mp_stacks_navigation_style_settings',
 		),
 		
+		array(
+			'field_id'			=> 'mp_stacks_navigation_mobile_switchout_width',
+			'field_title' 	=> __( 'Mobile Switchout Width', 'mp_stacks_navigation'),
+			'field_description' 	=> __( 'When the screen gets this small (or smaller), switch to a "Pop-Out" style navigation. Default: 600.', 'mp_stacks_navigation' ),
+			'field_type' 	=> 'number',
+			'field_value' => '600',
+			'field_showhider' => 'mp_stacks_navigation_style_settings',
+		),
+		array(
+			'field_id'			=> 'mp_stacks_navigation_mobile_right_or_left',
+			'field_title' 	=> __( 'Open Mobile Menu From...', 'mp_stacks_navigation'),
+			'field_description' 	=> __( 'Should the mobile menu open from the right or the left side of the screen? Default: Right.', 'mp_stacks_navigation' ),
+			'field_type' 	=> 'select',
+			'field_value' => 'right',
+			'field_select_values' => array( 
+				'right' => __( 'Right', 'mp_stacks_navigation' ),
+				'left' => __( 'Left', 'mp_stacks_navigation' ),
+			),
+			'field_showhider' => 'mp_stacks_navigation_style_settings',
+		),
+		
 	);
 	
 	
