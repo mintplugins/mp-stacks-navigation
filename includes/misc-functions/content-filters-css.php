@@ -50,6 +50,9 @@ function mp_stacks_brick_content_output_css_navigation( $css_output, $post_id, $
 	'}
 	#mp-stacks-navigation-container-' . $post_id . ' .menu-item a:hover{' . 
 		mp_core_css_line( 'color', $menu_font_color_when_mouse_over ) . 
+	'}
+	.mp-stacks-navigation-popout-holder{' . 
+		mp_core_css_line( 'font-size', $menu_font_size, 'px' ) . 	
 	'}';	
 		
 	
