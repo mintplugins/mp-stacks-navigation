@@ -37,6 +37,10 @@ function mp_stacks_brick_content_output_css_navigation( $css_output, $post_id, $
 	
 	//Spacing between items
 	$horizontal_spacing = mp_core_get_post_meta( $post_id, 'mp_stacks_navigation_item_horizontal_spacing', 20 );
+	
+	//Toggle button color
+	$toggle_button_color = mp_core_get_post_meta( $post_id, 'mp_stacks_navigation_mobile_toggle_button_color', '#fff' );
+	$toggle_button_hover_color = mp_core_get_post_meta( $post_id, 'mp_stacks_navigation_mobile_toggle_button_color_hover', '#fff' );
 		
 	//CSS for the navigation.
 	$css_navigation_output = 
@@ -51,9 +55,15 @@ function mp_stacks_brick_content_output_css_navigation( $css_output, $post_id, $
 	#mp-stacks-navigation-container-' . $post_id . ' .menu-item a:hover{' . 
 		mp_core_css_line( 'color', $menu_font_color_when_mouse_over ) . 
 	'}
-	.mp-stacks-navigation-popout-holder{' . 
+	#mp-stacks-navigation-popout-holder-' . $post_id . '{' . 
 		mp_core_css_line( 'font-size', $menu_font_size, 'px' ) . 	
-	'}';	
+	'}
+	#mp-stacks-navigation-container-' . $post_id . ' .mp-stacks-navigation-toggle{' . 
+		mp_core_css_line( 'color', $toggle_button_color ) .
+	'}
+	#mp-stacks-navigation-container-' . $post_id . ' .mp-stacks-navigation-toggle:hover{' . 
+		mp_core_css_line( 'color', $toggle_button_hover_color ) .
+	'}'	;
 		
 	
 	return $css_navigation_output . $css_output;
