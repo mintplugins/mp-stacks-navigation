@@ -135,6 +135,22 @@ function mp_stacks_navigation_create_meta_box(){
 			),
 			'field_showhider' => 'mp_stacks_navigation_style_settings',
 		),
+		array(
+			'field_id'			=> 'mp_stacks_navigation_mobile_toggle_button_color',
+			'field_title' 	=> __( 'Mobile Toggle Button Color', 'mp_stacks_navigation'),
+			'field_description' 	=> __( 'When screens are small (mobile/phones), what color should the "Toggle" button be? Default: #fff (white)', 'mp_stacks_navigation' ),
+			'field_type' 	=> 'colorpicker',
+			'field_value' => '#fff',
+			'field_showhider' => 'mp_stacks_navigation_style_settings',
+		),
+		array(
+			'field_id'			=> 'mp_stacks_navigation_mobile_toggle_button_color_hover',
+			'field_title' 	=> __( 'Mobile Toggle Button Color', 'mp_stacks_navigation'),
+			'field_description' 	=> __( 'When screens are small (mobile/phones), what color should the "Toggle" button be when the mouse goes over it? Default: #fff (white)', 'mp_stacks_navigation' ),
+			'field_type' 	=> 'colorpicker',
+			'field_value' => '#fff',
+			'field_showhider' => 'mp_stacks_navigation_style_settings',
+		),
 		
 	);
 	
