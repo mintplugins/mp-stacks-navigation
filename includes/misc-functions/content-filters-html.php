@@ -26,6 +26,8 @@ function mp_stacks_brick_content_output_navigation($default_content_output, $mp_
 		return $default_content_output; 	
 	}
 	
+	global $mp_stacks_navigation_current_brick_id;
+	
 	$content_output = NULL;
 	
 	$the_menu_to_show = mp_core_get_post_meta( $post_id, 'mp_stacks_navigation_menu' );
@@ -43,12 +45,12 @@ function mp_stacks_brick_content_output_navigation($default_content_output, $mp_
 		//Echo the version actually shown in the Brick
 		echo '<div id="mp-stacks-navigation-container-' . $post_id . '" class="mp-stacks-navigation-container mp-stacks-navigation-alignment-' . $menu_alignment . '">';
 			echo '<div class="mp-stacks-navigation-toggle-button-holder" style="display:none;"><a class="mp-stacks-navigation-toggle"></a></div>';
-			wp_nav_menu( array( 'menu' => $the_menu_to_show, 'fallback_cb' => 'mp_stacks_navigation_fallback', 'container_class' => 'mp-stacks-navigation', ) );
+			wp_nav_menu( array( 'menu' => $the_menu_to_show, 'fallback_cb' => 'mp_stacks_navigation_fallback', 'container_class' => 'mp-stacks-navigation', 'mp_stacks_brick_id' => $post_id ) );
 		echo '</div>';
 		
 		//Echo the version that will be used in the side popout
-		echo '<div id="mp-stacks-navigation-popout-holder-' . $post_id . '" class="mp-stacks-navigation-popout-holder mp-stacks-navigation-popout-holder-' . $open_from . ' mp-stacks-navigation-close">';
-			wp_nav_menu( array( 'menu' => $the_menu_to_show, 'fallback_cb' => 'mp_stacks_navigation_fallback', 'container_class' => 'mp-stacks-navigation-popout', ) );
+		echo '<div id="mp-stacks-navigation-popout-holder-' . $post_id . '" class="mp-stacks-navigation-popout-holder mp-stacks-navigation-popout-holder-' . $open_from . ' mp-stacks-navigation-close" style="display:none;">';
+			wp_nav_menu( array( 'menu' => $the_menu_to_show, 'fallback_cb' => 'mp_stacks_navigation_fallback', 'container_class' => 'mp-stacks-navigation-popout' ) );
 		echo '</div>';
 		
 	}
@@ -56,14 +58,58 @@ function mp_stacks_brick_content_output_navigation($default_content_output, $mp_
 	//Enable Media Queries for JS
 	 wp_enqueue_script( 'mp_stacks_navigation_enquire', plugins_url( '/js/enquire.min.js', dirname( __FILE__ ) ) );
 	 
-	 //MP Menu JS
-	 //wp_enqueue_script( 'mp_stacks_navigation_js', plugins_url( '/js/mp-stacks-navigation.js', dirname( __FILE__ ) ), array( 'jquery', 'mp_stacks_navigation_enquire' ) );
-	
-	 
 	 ob_start();
 	 ?>
      jQuery(document).ready(function($){
-	
+     
+         //When an item with a sub menu is hovered
+         $( '.mp-stacks-navigation > ul > .menu-item-has-children' ).on( 'mouseenter', function(){
+            
+            var this_brick_id = $(this).find( '> a').attr( 'mp_stacks_brick_id' );
+            
+            //The navigation area's current height
+            var nav_current_height = parseInt( $('#mp-brick-' + this_brick_id + ' .mp-stacks-navigation').css( 'height' ) );
+            
+            //This submenu's height
+            var this_submenu_height = parseInt( $(this).find( '.sub-menu').css( 'height' ) );
+            
+            //This nav button's height
+            var this_button_height = parseInt( $(this).css('height' ) );
+                         
+            var total_height = this_button_height + this_submenu_height + 'px';
+                       
+            $('#mp-brick-' + this_brick_id + ' .mp-stacks-navigation').css( 'min-height', total_height );
+       
+            
+         }).on( 'mouseleave', function(){
+        	
+            var this_brick_id = $(this).find( '> a').attr( 'mp_stacks_brick_id' );
+            
+            $('#mp-brick-' + this_brick_id + ' .mp-stacks-navigation').css( 'min-height', '' );
+            
+         });
+         
+         //When an item with a second level (or later) sub menu is hovered
+         $( '.mp-stacks-navigation > ul > .menu-item-has-children > ul .menu-item-has-children' ).on( 'mouseenter', function(){
+            
+            var this_brick_id = $(this).find( '> a').attr( 'mp_stacks_brick_id' );
+            
+            //The navigation area's current height
+            var nav_current_height = parseInt( $('#mp-brick-' + this_brick_id + ' .mp-stacks-navigation').css( 'height' ) );
+            
+            //This submenu's height
+            var this_submenu_height = parseInt( $(this).find( '.sub-menu').css( 'height' ) );
+            
+            //This nav button's height
+            var this_button_height = parseInt( $(this).css('height' ) );
+                         
+            var total_height = this_button_height + nav_current_height + this_submenu_height + 'px';
+                       
+            $('#mp-brick-' + this_brick_id + ' .mp-stacks-navigation').css( 'min-height', total_height );
+       
+            
+         });
+         
         //Wrap body is holding div which can have values which are not processed on 'body' or 'html'
         if ( !$( '#mp-stacks-navigation-site-wrap' ).length ){
         	$( 'body' ).wrapInner('<div id="mp-stacks-navigation-site-wrap" />');
@@ -187,3 +233,46 @@ add_filter('mp_stacks_brick_content_output', 'mp_stacks_brick_content_output_nav
 function mp_stacks_navigation_fallback(){
 	echo __( 'Edit this Brick to set a menu to show here', 'mp_stacks_navigation' );	
 }
+
+/**
+ * Filter Function which returns class name for a brick
+ *
+ * @since    1.0.0
+ * @link     http://mintplugins.com/doc/
+ * @param    string $classes See link for description.
+ * @param    string $post_id See link for description.
+ * @return   void
+ */
+function mp_stacks_navigation_brick_class( $classes, $post_id ){
+	
+	//First Media Type
+	$mp_stacks_first_content_type = get_post_meta($post_id, 'brick_first_content_type', true);
+	
+	//Second Media Type
+	$mp_stacks_second_content_type = get_post_meta($post_id, 'brick_second_content_type', true);
+	
+	//If navigation is on for this brick
+	if ( $mp_stacks_first_content_type == 'navigation' || $mp_stacks_second_content_type == 'navigation' ){
+		
+		//Add the navigation class name to the brick
+		$classes .= ' mp-brick-navigation';
+		
+	}
+	
+	//Return CSS Output
+	return $classes;
+	
+}
+add_filter( 'mp_stacks_brick_class', 'mp_stacks_navigation_brick_class', 10, 2);
+
+function add_specific_menu_atts( $atts, $item, $args ) {
+	
+	//If this menu is being output by the mp stacks navigation addon
+	if ( isset( $args->mp_stacks_brick_id ) ){
+		//Add the Brick Id to each menu item
+		$atts['mp_stacks_brick_id'] = $args->mp_stacks_brick_id;
+	}	
+	
+    return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'add_specific_menu_atts', 10, 3 );
