@@ -3,7 +3,7 @@
 Plugin Name: MP Stacks + Navigation
 Plugin URI: https://mintplugins.com/plugins/mp-stacks-navigation
 Description: Content-Type Add-On for MP Stacks which displays navigation menus in a brick.
-Version: 1.0.0.0
+Version: 1.0.0.1
 Author: Mint Plugins
 Author URI: http://mintplugins.com
 Text Domain: mp_stacks_navigation
@@ -34,7 +34,7 @@ License: GPL2
 */
 // Plugin version
 if( !defined( 'MP_STACKS_NAVIGATION_VERSION' ) )
-	define( 'MP_STACKS_NAVIGATION_VERSION', '1.0.0.0' );
+	define( 'MP_STACKS_NAVIGATION_VERSION', '1.0.0.1' );
 
 // Plugin Folder URL
 if( !defined( 'MP_STACKS_NAVIGATION_PLUGIN_URL' ) )
