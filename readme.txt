@@ -4,7 +4,7 @@ Donate link: http://mintplugins.com/
 Tags: message bar, header
 Requires at least: 3.5
 Tested up to: 4.3
-Stable tag: 1.0.0.1
+Stable tag: 1.0.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,10 @@ See full instructions at http://mintplugins.com/doc/mp-stacks
 
 == Changelog ==
 
-1.0.0.1 = December 9, 2015
+= 1.0.0.2 = December 13, 2015
+* Revamped mobile navigaion to be completely within the brick instead of popping out from the side of the page. 
+
+= 1.0.0.1 = December 9, 2015
 * Make sure deep sub menus are bordered correctly
 * Remove old js file - no longer needed
 * Make Brick expand to show dropdown menus
