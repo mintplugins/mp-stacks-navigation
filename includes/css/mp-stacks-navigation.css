@@ -18,35 +18,35 @@
   }
 }
 */
- 
+
  [class^="mp-stacks-navigation-"]:before, [class*=" mp-stacks-navigation-"]:before {
   font-family: "mp_stacks_navigation";
   font-style: normal;
   font-weight: normal;
   speak: none;
- 
+
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
   text-align: center;
   /* opacity: .8; */
- 
+
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+
   font-size:44px;
   float: left;
- 
+
   /* you can be more comfortable with increased mp-stacks-navigations size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
+
 .mp-stacks-navigation-toggle:before { content: '\e800'; } /* '' */
- 
+
 .mp-stacks-navigation-th-list:before { content: '\e82e'; } /* '' */
 .mp-stacks-navigation-cancel:before { content: '\e804'; } /* '' */
 .mp-stacks-navigation-cancel-circled:before { content: '\e805'; } /* '' */
@@ -59,7 +59,7 @@
 
 /*
 
-Styles for the UL containing the fields 
+Styles for the UL containing the fields
 
 */
 #mp-stacks-navigation-site-wrap{
@@ -73,24 +73,24 @@ Styles for the UL containing the fields
 .mp-stacks-navigation-container{
 	display:table;
 	position:relative;
-	margin:0px auto 0px auto;	
+	margin:0px auto 0px auto;
 	z-index:9999;
 }
-.mp-stacks-navigation-container.mp-stacks-navigation-alignment-horizontal li{
+.mp-stacks-navigation-container li{
 	list-style:none;
-	margin:0px;
+	margin:0px!important;
 	display:table-cell;
 	position:relative;
 }
 /* Remove any padding from the first menu item */
-.mp-stacks-navigation-container.mp-stacks-navigation-alignment-horizontal .mp-stacks-navigation > .menu > li:last-child{
+.mp-stacks-navigation-container .mp-stacks-navigation > .menu > li:last-child{
 	padding-right:0px!important;
 }
 .mp-stacks-navigation-container .mp-stacks-navigation ul{
-	margin: 0;	
+	margin: 0;
 }
 .mp-stacks-navigation-container .sub-menu{
-	text-align:left;	
+	text-align:left;
 }
 .mp-stacks-navigation-container .sub-menu li{
 	display:block;
@@ -99,10 +99,10 @@ Styles for the UL containing the fields
 .mp-brick.mp-brick-navigation{
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition:    all 0.2s ease-in-out;
-	transition:         all 0.2s ease-in-out;	
+	transition:         all 0.2s ease-in-out;
 }
 .mp-stacks-navigation-container .menu-item-has-children .sub-menu{
-		
+
 	position: absolute;
 	top: 1.3em;
 	left: 50%;
@@ -117,21 +117,21 @@ Styles for the UL containing the fields
 	-webkit-transform: translate(-50%, 0%) scale(0);
 	-moz-transform:    translate(-50%, 0%) scale(0);
 	transform:         translate(-50%, 0%) scale(0);
-	
+
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition:    all 0.2s ease-in-out;
 	transition:         all 0.2s ease-in-out;
 }
 
 .mp-stacks-navigation-container .menu-item-has-children:hover > .sub-menu{
-	
+
 	position: absolute;
 	top: 1.3em;
 	left: -50%;
 	z-index: 99999;
 	opacity: 1;
 	padding-top:20px;
-	
+
 
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility:    hidden;
@@ -185,103 +185,46 @@ Styles for the UL containing the fields
 .mp-stacks-navigation-container .sub-menu .sub-menu{
 	left:100%!important;
 	top:0%!important;
-	padding-top:0px!important;	
+	padding-top:0px!important;
 }
 
 
-/* Mobile Navigation Styles */
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-open-left {
-	-webkit-transform: translate3d(240px, 0, 0);
-	-moz-transform: translate3d(240px, 0, 0);
-	transform: translate3d(240px, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-open-right {
-	-webkit-transform: translate3d(-240px, 0, 0);
-	-moz-transform: translate3d(-240px, 0, 0);
-	transform: translate3d(-240px, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-close {
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
+/* Mobile Navigation Styles - The opening animation for the popout nav is added by js so that we can properly set the max-height attribute to match the height of the nav */
+.mp-stacks-navigation-popout-holder{
+  max-height: 0;
+	overflow: hidden;
 
-/* Popout menu related styles */
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-open-left,
-.mp-stacks-navigation-popout-holder-right.mp-stacks-navigation-close {
-	-webkit-transform: translate3d(240px, 0, 0);
-	-moz-transform: translate3d(240px, 0, 0);
-	transform: translate3d(240px, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
+	/* Set our transitions up. */
+	-webkit-transition: max-height 0.8s;
+	-moz-transition: max-height 0.8s;
+	transition: max-height 0.8s;
 }
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-open-right,
-.mp-stacks-navigation-popout-holder-left.mp-stacks-navigation-close {
-	-webkit-transform: translate3d(-240px, 0, 0);
-	-moz-transform: translate3d(-240px, 0, 0);
-	transform: translate3d(-240px, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-#mp-stacks-navigation-site-wrap.mp-stacks-navigation-close,
-.mp-stacks-navigation-popout-holder.mp-stacks-navigation-open-left,
-.mp-stacks-navigation-popout-holder.mp-stacks-navigation-open-right {
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-	
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-
 .mp-stacks-navigation-toggle-button-holder{
-	display: inline-block;	
+	display: inline-block;
 }
 .mp-stacks-navigation-popout-holder-left{
-	width: 240px;
 	margin:0px!important;
-	position: absolute;
-	top: 0;
 	overflow:hidden;
 }
 .mp-stacks-navigation-popout-holder-right{
-	width: 240px;
 	margin:0px!important;
-	position: absolute;
-	top: 0;
-	right:0;
 	overflow:hidden;
 }
-.admin-bar .mp-stacks-navigation-popout-holder{
-	margin-top: 32px!important;	
-}
-.admin-bar .mp-stacks-navigation-popout-holder a{
-	text-decoration:none;	
+.mp-stacks-navigation-popout-holder a{
+	text-decoration:none;
 }
 .mp-stacks-navigation-popout-holder .menu,
 .mp-stacks-navigation-popout-holder .menu .sub-menu{
-	list-style:none;	
+	list-style:none;
+  text-align:left;
 }
 .mp-stacks-navigation-popout-holder .menu .sub-menu{
 	display:none;
 	margin:0px 0px 0px 20px;
 }
 .mp-stacks-navigation-popout-holder .menu li{
-	background-color:#fff;
-	margin-bottom:0px;
+	margin-bottom:0px!important;
 	position:relative;
-	width:100%;
 }
 .mp-stacks-navigation-popout-holder .menu li a{
 	display:inline-block;
@@ -296,5 +239,5 @@ Styles for the UL containing the fields
 	background-color:#F8F8F8;
 }
 .mp-stacks-navigation-popout-holder .menu li.menu-item-has-children{
-	width:100%;	
+	width:100%;
 }
